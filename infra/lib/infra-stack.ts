@@ -98,10 +98,7 @@ export class InfraStack extends cdk.Stack {
               commands: ["echo 'Post-build phase'", "ls -la cdk.out/"],
             },
           },
-          artifacts: {
-            "base-directory": "infra/cdk.out",
-            files: ["**/*"],
-          },
+          // artifacts section removed - CodeBuildStep handles this automatically
         }),
       }),
       crossAccountKeys: true,
