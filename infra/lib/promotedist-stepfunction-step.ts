@@ -6,7 +6,7 @@ import {
   StateMachineInput,
   StepFunctionInvokeAction,
 } from "aws-cdk-lib/aws-codepipeline-actions";
-import { IStage } from "aws-cdk-lib/aws-codepipeline/lib";
+import { IStage } from "aws-cdk-lib/aws-codepipeline";
 import { StateMachine } from "aws-cdk-lib/aws-stepfunctions";
 import {
   CodePipelineActionFactoryResult,

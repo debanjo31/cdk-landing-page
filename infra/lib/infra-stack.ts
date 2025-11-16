@@ -36,9 +36,18 @@ export class InfraStack extends cdk.Stack {
       synth: new CodeBuildStep("Synth", {
         input: this.getCodePipelineSource(),
         commands: [
-          "cd infra", // Change to the infra directory
-          "node --version", // Log Node.js version for debugging
-          "npm --version", // Log npm version for debugging
+          // Build React app first
+          "echo 'Building React application...'",
+          "node --version",
+          "npm --version",
+          "npm ci",
+          "npm run build", // Creates dist/ folder
+          "echo 'React build complete'",
+          "ls -la dist/",
+          
+          // Then build CDK infrastructure
+          "echo 'Building CDK infrastructure...'",
+          "cd infra",
           "npm ci",
           "npm run build",
           "npx cdk synth",

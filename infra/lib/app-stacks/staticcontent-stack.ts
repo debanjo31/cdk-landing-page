@@ -36,7 +36,8 @@ export class StaticContentStack extends cdk.NestedStack {
     });
 
     new BucketDeployment(this, "DeployWebSite", {
-      sources: [Source.asset("./mysite-content")],
+      // Deploy the built React application (Vite default output directory)
+      sources: [Source.asset("../dist")],
       destinationBucket: targetBucket,
     });
 
