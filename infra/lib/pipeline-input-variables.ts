@@ -3,14 +3,14 @@
 
 export const PipelineInputVariables = {
   // Pipeline variables
-  PIPELINE_CODE_REPO: "debanjo/cdk-landing-page", // Change this to your GitHub repo in format: owner/repo-name
+  PIPELINE_CODE_REPO: "debanjo31/cdk-landing-page", // Change this to your GitHub repo in format: owner/repo-name
   PIPELINE_CODE_BRANCH: "master",
   GITHUB_CONNECTION_ARN:
-    "arn:aws:codeconnections:region:account-id:connection/connection-id", // Replace with your actual CodeConnection ARN
+    "arn:aws:codeconnections:us-east-1:590183693606:connection/823cb8a6-d4b2-4d4b-9eb1-43068d8c573d", // Replace with your actual CodeConnection ARN
 
-  PIPELINE_NAME: "cloudfront-cd-pipeline",
+  PIPELINE_NAME: "debanjo-pipeline",
   // prefix
-  STEP_FUNCTION_NAME: "CFCDPipelineStepFunction",
+  STEP_FUNCTION_NAME: "ipelineStepFunction",
 
   ENABLE_CONTINUOUS_DEPLOYMENT: false,
   HEADER_BASED_TRAFFIC_CONFIG: true,
