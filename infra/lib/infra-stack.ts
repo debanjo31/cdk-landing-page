@@ -40,8 +40,8 @@ export class InfraStack extends cdk.Stack {
           "echo 'Building React application...'",
           "node --version",
           "npm --version",
-          "npm ci",
           "npm install -g typescript",
+          "npm ci",
           "npm run build", // Creates dist/ folder
           "echo 'React build complete'",
           "ls -la dist/",
@@ -89,8 +89,8 @@ export class InfraStack extends cdk.Stack {
             build: {
               commands: [
                 "echo 'Build phase started'",
-                "npm ci",
                 "npm install -g typescript",
+                "npm ci",
                 "npm run build",
                 "npx cdk synth",
                 "echo 'Build phase completed'",
