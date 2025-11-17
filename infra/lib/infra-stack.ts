@@ -83,6 +83,7 @@ export class InfraStack extends cdk.Stack {
               commands: [
                 "echo 'Pre-build phase'",
                 "cd infra",
+                "npm install -g typescript",
                 "echo 'Installing npm dependencies with legacy peer deps'",
               ],
             },
