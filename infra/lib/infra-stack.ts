@@ -68,7 +68,17 @@ export class InfraStack extends cdk.Stack {
           computeType: ComputeType.MEDIUM,
           privileged: false,
         },
-        // REMOVED partialBuildSpec - it was causing conflicts
+        // Specify Node.js 20 runtime for Vite compatibility
+        partialBuildSpec: BuildSpec.fromObject({
+          version: "0.2",
+          phases: {
+            install: {
+              "runtime-versions": {
+                nodejs: "20",
+              },
+            },
+          },
+        }),
       }),
       crossAccountKeys: true,
       selfMutation: true,
