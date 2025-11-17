@@ -43,7 +43,10 @@ export class InfraStack extends cdk.Stack {
           "echo 'Building React application...'",
           "node --version",
           "npm --version",
-          "npm ci",
+          "rm -rf node_modules package-lock.json", // Clean slate
+          "npm install", // Fresh install
+          "echo 'Verifying @vitejs/plugin-react installation...'",
+          "ls -la node_modules/@vitejs/ || echo 'Plugin not found!'",
           "npm run build", // Creates dist/ folder
           "echo 'React build complete'",
           "ls -la dist/",
