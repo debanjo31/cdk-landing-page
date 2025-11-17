@@ -36,11 +36,13 @@ export class InfraStack extends cdk.Stack {
       synth: new CodeBuildStep("Synth", {
         input: this.getCodePipelineSource(),
         commands: [
+          // Install TypeScript globally first (before any builds)
+          "npm install -g typescript",
+
           // Build React app first
           "echo 'Building React application...'",
           "node --version",
           "npm --version",
-          "npm install -g typescript",
           "npm ci",
           "npm run build", // Creates dist/ folder
           "echo 'React build complete'",
@@ -53,56 +55,20 @@ export class InfraStack extends cdk.Stack {
           "npm run build",
           "npx cdk synth",
         ],
-        primaryOutputDirectory: "infra/cdk.out", // Tell CDK where to find the output
+        primaryOutputDirectory: "infra/cdk.out",
         env: {
           NODE_ENV: "production",
           CDK_DEFAULT_ACCOUNT: props?.env?.account || "",
           CDK_DEFAULT_REGION: props?.env?.region || "",
-          NPM_CONFIG_AUDIT: "false", // Skip npm audit for faster builds
-          NPM_CONFIG_FUND: "false", // Skip npm funding messages
+          NPM_CONFIG_AUDIT: "false",
+          NPM_CONFIG_FUND: "false",
         },
         buildEnvironment: {
           buildImage: LinuxBuildImage.STANDARD_7_0,
-          computeType: ComputeType.MEDIUM, // Better performance than small
-          privileged: false, // No Docker daemon needed
+          computeType: ComputeType.MEDIUM,
+          privileged: false,
         },
-        partialBuildSpec: BuildSpec.fromObject({
-          version: "0.2",
-          phases: {
-            install: {
-              "runtime-versions": {
-                nodejs: "20", // Specify Node.js 20 runtime (latest LTS)
-              },
-              commands: [
-                "echo 'Installing dependencies...'",
-                "node --version",
-                "npm --version",
-              ],
-            },
-            pre_build: {
-              commands: [
-                "echo 'Pre-build phase'",
-                "cd infra",
-                "npm install -g typescript",
-                "echo 'Installing npm dependencies with legacy peer deps'",
-              ],
-            },
-            build: {
-              commands: [
-                "echo 'Build phase started'",
-                "npm install -g typescript",
-                "npm ci",
-                "npm run build",
-                "npx cdk synth",
-                "echo 'Build phase completed'",
-              ],
-            },
-            post_build: {
-              commands: ["echo 'Post-build phase'", "ls -la cdk.out/"],
-            },
-          },
-          // artifacts section removed - CodeBuildStep handles this automatically
-        }),
+        // REMOVE the partialBuildSpec entirely - let CodeBuildStep handle it
       }),
       crossAccountKeys: true,
       // Enable self-mutation for pipeline updates
