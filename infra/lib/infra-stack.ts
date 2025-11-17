@@ -36,7 +36,7 @@ export class InfraStack extends cdk.Stack {
       synth: new CodeBuildStep("Synth", {
         input: this.getCodePipelineSource(),
         commands: [
-          // Install TypeScript globally first (before any builds)
+          // Install TypeScript globally first
           "npm install -g typescript",
 
           // Build React app first
@@ -68,12 +68,10 @@ export class InfraStack extends cdk.Stack {
           computeType: ComputeType.MEDIUM,
           privileged: false,
         },
-        // REMOVE the partialBuildSpec entirely - let CodeBuildStep handle it
+        // REMOVED partialBuildSpec - it was causing conflicts
       }),
       crossAccountKeys: true,
-      // Enable self-mutation for pipeline updates
       selfMutation: true,
-      // Use larger build instances for better performance
     });
 
     const stepFunctionStack = new StepFunctionStack(
