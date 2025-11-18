@@ -16,8 +16,9 @@ import {
   PipelineExportNames,
   PipelineInputVariables,
 } from "./pipeline-input-variables";
-import fs = require("fs");
-import path = require("path");
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 export class StepFunctionStack extends cdk.NestedStack {
   stepFunctionName: string;
@@ -35,13 +36,13 @@ export class StepFunctionStack extends cdk.NestedStack {
       assumedBy: new ServicePrincipal("states.amazonaws.com"),
       description: "CloudFront Continuous Deployment StepFunction Role",
       inlinePolicies: {
-        "Allow-LogGroup-Permissions": this.createLogGroupPolicy()
+        "Allow-LogGroup-Permissions": this.createLogGroupPolicy(),
       },
     });
 
     this.stateMachineRoleArn = stateMachineRole.roleArn;
-    const stepFunctionDefinition = fs.readFileSync(
-      path.join(__dirname, "./stepfunction-definition.json"),
+    const stepFunctionDefinition = readFileSync(
+      join(__dirname, "./stepfunction-definition.json"),
       "utf8"
     );
 
