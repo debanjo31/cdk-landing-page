@@ -12,6 +12,10 @@ export const PipelineInputVariables = {
   // prefix
   STEP_FUNCTION_NAME: "ipelineStepFunction",
 
+  // AWS Environment
+  AWS_ACCOUNT: "590183693606",
+  AWS_REGION: "us-east-1",
+
   ENABLE_CONTINUOUS_DEPLOYMENT: true,
   HEADER_BASED_TRAFFIC_CONFIG: true,
 
