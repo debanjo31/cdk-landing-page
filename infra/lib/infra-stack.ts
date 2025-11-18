@@ -55,7 +55,7 @@ export class InfraStack extends cdk.Stack {
           // Then build CDK infrastructure
           "echo 'Building CDK infrastructure...'",
           "cd infra",
-          "npm ci",
+          "npm ci --include=dev",
           "npm run build",
           "npx cdk synth",
         ],
