@@ -40,11 +40,7 @@ const Header: React.FC<HeaderProps> = ({ cartCount, onCartToggle }) => {
             className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 text-slate-200 hover:border-amber-400 hover:text-amber-300"
             onClick={() => onCartToggle && onCartToggle()}
           >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              className="h-4 w-4"
-            >
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4">
               <path
                 d="M7 4h-.5a1.5 1.5 0 0 0 0 3H7m0-3h10.5a1.5 1.5 0 0 1 0 3H7m0-3v3m2 15a1 1 0 1 1-2 0m12 0a1 1 0 1 1-2 0M5 7l1.5 9.5A1.5 1.5 0 0 0 8 18h8a1.5 1.5 0 0 0 1.48-1.23L18.5 7"
                 fill="none"
@@ -84,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({ cartCount, onCartToggle }) => {
               Shop
             </a>
             <a href="#highlights" className="py-1">
-              Highlights
+              Trending
             </a>
             <a href="#support" className="py-1">
               Support

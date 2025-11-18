@@ -12,7 +12,7 @@ export const PipelineInputVariables = {
   // prefix
   STEP_FUNCTION_NAME: "ipelineStepFunction",
 
-  ENABLE_CONTINUOUS_DEPLOYMENT: false,
+  ENABLE_CONTINUOUS_DEPLOYMENT: true,
   HEADER_BASED_TRAFFIC_CONFIG: true,
 
   // site access logs bucket name
