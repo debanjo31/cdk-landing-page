@@ -44,7 +44,8 @@ export class InfraStack extends cdk.Stack {
           "node --version",
           "npm --version",
           "rm -rf node_modules package-lock.json", // Clean slate
-          "npm install", // Fresh install
+          // Ensure devDependencies (like @vitejs/plugin-react) are installed even when NODE_ENV=production
+          "npm install --include=dev", // Fresh install including dev deps
           "echo 'Verifying @vitejs/plugin-react installation...'",
           "ls -la node_modules/@vitejs/ || echo 'Plugin not found!'",
           "npm run build", // Creates dist/ folder
