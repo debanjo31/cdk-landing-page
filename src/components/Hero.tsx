@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
                 href="#highlights"
                 className="uppercase rounded-full border border-slate-500 px-5 py-2 text-xs font-semibold tracking-wide text-slate-100 hover:border-slate-300 hover:text-white"
               >
-                Why Shop.ME
+                Why Shop.ME?
               </a>
             </div>
           </div>

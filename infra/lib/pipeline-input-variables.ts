@@ -16,7 +16,7 @@ export const PipelineInputVariables = {
   AWS_ACCOUNT: "590183693606",
   AWS_REGION: "us-east-1",
 
-  ENABLE_CONTINUOUS_DEPLOYMENT: false,
+  ENABLE_CONTINUOUS_DEPLOYMENT: true,
   HEADER_BASED_TRAFFIC_CONFIG: true,
 
   // site access logs bucket name
