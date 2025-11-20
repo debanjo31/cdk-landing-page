@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
               id="hero-title"
               className="font-serif text-4xl font-semibold leading-tight tracking-tight text-slate-50 sm:text-6xl"
             >
-              Shop better
+              Shop me
               <span className="block text-3xl font-normal text-amber-300 sm:text-5xl">
                 in one place
               </span>
