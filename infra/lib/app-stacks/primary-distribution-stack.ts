@@ -6,6 +6,7 @@ import {
   CfnDistribution,
   CfnOriginAccessControl,
 } from "aws-cdk-lib/aws-cloudfront";
+import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { Construct } from "constructs";
 import {
   PipelineExportNames
@@ -38,6 +39,13 @@ export class PrimaryDistributionStack extends cdk.Stack {
       bucketDomainName,
       originAccessControlId
     );
+
+    new BucketDeployment(this, "DeployWebSite", {
+      sources: [Source.asset("../dist")],
+      destinationBucket: staticContentStack.bucket,
+      distribution: primaryDistribution,
+      distributionPaths: ["/*"],
+    });
 
     const outputName = PipelineExportNames.PRIMARY_DISTRIBUTION_ID;
 

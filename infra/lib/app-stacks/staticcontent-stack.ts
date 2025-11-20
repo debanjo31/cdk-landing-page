@@ -3,13 +3,14 @@
 
 import * as cdk from "aws-cdk-lib";
 import { Bucket } from "aws-cdk-lib/aws-s3";
-import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
+
 import { Construct } from "constructs";
 import { PipelineInputVariables } from "../pipeline-input-variables";
 
 export class StaticContentStack extends cdk.NestedStack {
   bucketName: string;
   bucketDomainName: string;
+  bucket: Bucket;
 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -35,12 +36,7 @@ export class StaticContentStack extends cdk.NestedStack {
       serverAccessLogsPrefix: "mysite-content-access-log",
     });
 
-    new BucketDeployment(this, "DeployWebSite", {
-      // Deploy the built React application (Vite default output directory)
-      sources: [Source.asset("../dist")],
-      destinationBucket: targetBucket,
-    });
-
+    this.bucket = targetBucket;
     this.bucketName = targetBucket.bucketName;
     this.bucketDomainName = targetBucket.bucketDomainName;
   }

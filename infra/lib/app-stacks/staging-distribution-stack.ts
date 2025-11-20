@@ -8,6 +8,7 @@ import {
   CfnDistribution,
   CfnOriginAccessControl,
 } from "aws-cdk-lib/aws-cloudfront";
+import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { CfDistributionConfiguration } from "./cf-distribution-config";
 import { Fn } from "aws-cdk-lib";
 import { StaticContentStack } from "./staticcontent-stack";
@@ -42,6 +43,13 @@ export class StagingDistributionStack extends cdk.Stack {
     const deploymentPolicy = this.createDeploymentPolicy(
       stagingDistribution.attrDomainName
     );
+
+    new BucketDeployment(this, "DeployWebSite", {
+      sources: [Source.asset("../dist")],
+      destinationBucket: staticContentStack.bucket,
+      distribution: stagingDistribution,
+      distributionPaths: ["/*"],
+    });
 
     const outputName = PipelineExportNames.STAGING_DISTRIBUTION_ID;
     this.distributionIdOutput = new cdk.CfnOutput(this, outputName, {
