@@ -20,17 +20,6 @@ The solution uses the following AWS services:
 *   **Amazon S3**: Stores the static assets (Blue and Green buckets).
 *   **AWS Step Functions**: Orchestrates the promotion of the Staging distribution to Primary.
 
-```mermaid
-graph TD
-    User[User] --> CF[CloudFront Primary]
-    CF -->|Default Traffic| Blue[S3 Bucket (Blue/Old)]
-    CF -->|Header: aws-cf-cd-test: blue| Green[S3 Bucket (Green/New)]
-    
-    Pipeline[CodePipeline] -->|Build & Deploy| Green
-    Pipeline -->|Manual Approval| StepFunction[Step Function]
-    StepFunction -->|Promote| CF
-```
-
 ## 🛠 Prerequisites
 
 *   Node.js 20+
